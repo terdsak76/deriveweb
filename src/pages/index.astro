@@ -48,11 +48,35 @@ const companyInfo = {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
     }
 
     .logo {
       font-weight: 600;
       font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 600;
     }
 
     .contact-link {
@@ -140,6 +164,18 @@ const companyInfo = {
     }
 
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
       .hero {
         grid-template-columns: 1fr;
       }
@@ -157,7 +193,12 @@ const companyInfo = {
     <!-- Header -->
     <header>
       <div class="logo">{companyInfo.name}</div>
-      <a href="#contact" class="contact-link">Contact</a>
+      <nav class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/products">Products</a>
+        <a href="/site-references">Site References</a>
+        <a href="#contact" class="contact-link">Contact</a>
+      </nav>
     </header>
 
     <!-- Hero -->
