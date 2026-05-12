@@ -1,0 +1,243 @@
+---
+// Component Script (runs on server)
+const companyInfo = {
+  name: "Your Company Name",
+  address: "123 Business Street, City, State 12345, Country",
+  phone: "+1 (555) 123-4567",
+  facebookPage: "https://facebook.com/yourcompany",
+  contactEmail: "contact@yourcompany.com",
+  contactPerson: "John Doe"
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{companyInfo.name} - Welcome</title>
+  <meta name="description" content={`Contact ${companyInfo.name} for all your business needs.`}>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      padding: 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .logo {
+      max-width: 250px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .company-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .content {
+      padding: 50px 40px;
+    }
+
+    .info-section {
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .info-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      flex-shrink: 0;
+      color: white;
+      font-size: 24px;
+    }
+
+    .info-content {
+      flex: 1;
+    }
+
+    .info-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #6b7280;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      color: #1f2937;
+      font-weight: 500;
+    }
+
+    .info-value a {
+      color: #2563eb;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .info-value a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    .social-button {
+      display: inline-flex;
+      align-items: center;
+      background: #1877f2;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+
+    .social-button:hover {
+      background: #0c63d4;
+    }
+
+    .social-button svg {
+      margin-right: 8px;
+    }
+
+    .footer {
+      background: #f8fafc;
+      padding: 30px 40px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .company-name {
+        font-size: 1.8rem;
+      }
+
+      .content {
+        padding: 30px 20px;
+      }
+
+      .info-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .icon {
+        margin: 0 auto 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="/logo.svg" alt={`${companyInfo.name} Logo`} class="logo">
+      <h1 class="company-name">{companyInfo.name}</h1>
+    </div>
+
+    <div class="content">
+      <div class="info-section">
+        <div class="info-item">
+          <div class="icon">📍</div>
+          <div class="info-content">
+            <div class="info-label">Address</div>
+            <div class="info-value">{companyInfo.address}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon">📞</div>
+          <div class="info-content">
+            <div class="info-label">Phone Number</div>
+            <div class="info-value">
+              <a href={`tel:${companyInfo.phone.replace(/\s/g, '')}`}>{companyInfo.phone}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon">✉️</div>
+          <div class="info-content">
+            <div class="info-label">Contact Person</div>
+            <div class="info-value">
+              {companyInfo.contactPerson} - <a href={`mailto:${companyInfo.contactEmail}`}>{companyInfo.contactEmail}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon">👍</div>
+          <div class="info-content">
+            <div class="info-label">Follow Us</div>
+            <a href={companyInfo.facebookPage} target="_blank" rel="noopener noreferrer" class="social-button">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              Visit Our Facebook Page
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; {new Date().getFullYear()} {companyInfo.name}. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
