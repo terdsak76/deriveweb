@@ -1,0 +1,430 @@
+---
+// Component Script
+const companyInfo = {
+  name: "DeRIVE Innovation",
+  tagline: "Engineering & Digital Solutions for a Better Tomorrow",
+  address: "653/37 ถนนจรัญสนิทวงศ์ บางกอกน้อย กรุงเทพฯ 10700",
+  phone: "+66 (81) 492-6996",
+  email: "derive.in8@derive.co.th",
+  contactPerson: "คุณกัญญารัตน์",
+  facebook: "https://www.facebook.com/deriveinnovation/"
+};
+
+const resourceDetails = {
+  title: "Product Demonstration Video",
+  fileName: "demo.mov",
+  fileSize: "76.8 MB",
+  fileType: "QuickTime Movie (.mov)",
+  resolution: "1080p Full HD",
+  description: "A comprehensive video walkthrough showcasing DeRIVE's core products in action, including VaRP TMS and Route Optimization."
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources - {companyInfo.name}</title>
+
+  <!-- Google Font (clean + professional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f9fafb;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --card-bg: #ffffff;
+      --gradient-start: #3b82f6;
+      --gradient-end: #1d4ed8;
+      --accent: #10b981;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--text) 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Main Grid for Resource Details and Player */
+    .resource-wrapper {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+      align-items: start;
+    }
+
+    /* Premium Video Frame Container */
+    .player-container {
+      background: #090d16;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border: 1px solid #1e293b;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .player-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15);
+    }
+
+    .video-element {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    /* Right column info card */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .info-tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      align-self: start;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .info-card h2 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .info-card p.description {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    /* Specs List */
+    .specs-list {
+      margin-bottom: 35px;
+      border-top: 1px solid var(--border);
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .spec-label {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .spec-value {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Download CTA button with premium micro-interactions */
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #ffffff;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.6s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+      background: linear-gradient(135deg, var(--primary-dark), var(--gradient-end));
+    }
+
+    .download-btn:hover::before {
+      left: 100%;
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+    }
+
+    .download-btn svg {
+      width: 22px;
+      height: 22px;
+      transition: transform 0.3s ease;
+    }
+
+    .download-btn:hover svg {
+      transform: translateY(2px);
+    }
+
+    /* Browser Compatibility Notice Card */
+    .notice-card {
+      margin-top: 25px;
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: flex;
+      gap: 15px;
+      align-items: start;
+    }
+
+    .notice-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .notice-text {
+      font-size: 0.85rem;
+      color: #92400e;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .notice-text strong {
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .resource-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .info-card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Header Navigation -->
+    <header>
+      <div class="logo">{companyInfo.name}</div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/site-references">Site References</a>
+        <a href="/resources" class="active">Resources</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <h1>Resources</h1>
+      <p>Access and download product materials, documentation, and demonstrations.</p>
+    </section>
+
+    <!-- Content Section -->
+    <div class="resource-wrapper">
+      
+      <!-- Premium Video Player -->
+      <div class="player-container">
+        <video controls class="video-element" preload="metadata" poster="/hero.jpg">
+          <source src="/resources/demo.mov" type="video/mp4" />
+          <source src="/resources/demo.mov" type="video/quicktime" />
+          Your browser does not support inline video playback. Please download the video file below to watch.
+        </video>
+      </div>
+
+      <!-- Info and Actions Card -->
+      <div class="info-card">
+        <span class="info-tag">Video Material</span>
+        <h2>{resourceDetails.title}</h2>
+        <p class="description">{resourceDetails.description}</p>
+
+        <!-- Specifications -->
+        <div class="specs-list">
+          <div class="spec-item">
+            <span class="spec-label">Filename</span>
+            <span class="spec-value">{resourceDetails.fileName}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">File Format</span>
+            <span class="spec-value">{resourceDetails.fileType}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Resolution</span>
+            <span class="spec-value">{resourceDetails.resolution}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">File Size</span>
+            <span class="spec-value">{resourceDetails.fileSize}</span>
+          </div>
+        </div>
+
+        <!-- Download Action -->
+        <a href="/resources/demo.mov" download class="download-btn">
+          <!-- Download SVG Icon -->
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" x2="12" y1="15" y2="3"></line>
+          </svg>
+          Download Demo Video
+        </a>
+
+        <!-- Compatibility Warning -->
+        <div class="notice-card">
+          <span class="notice-icon">ℹ️</span>
+          <p class="notice-text">
+            <strong>Note:</strong> Some browsers may require external software to play <code>.mov</code> files directly inside the page. If the player does not start, click the button above to download and watch the video using your system's media player.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
+    </footer>
+
+  </div>
+</body>
+</html>
