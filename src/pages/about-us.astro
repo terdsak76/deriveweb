@@ -1,0 +1,510 @@
+---
+const companyInfo = {
+  name: "DeRIVE Innovation",
+  address: "653/37 ถนนจรัญสนิทวงศ์ บางกอกน้อย กรุงเทพมหานคร 10700",
+  phone: "064-934-0533",
+  email: "derive.in8@derive.co.th",
+};
+---
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - {companyInfo.name}</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --bg-white: #ffffff;
+      --bg-light: #f9fafb;
+      --border-color: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .navbar.scrolled {
+      background-color: var(--bg-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary);
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/icons/about us BG (1).png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 180px 20px 120px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin: 0 0 20px;
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Content Sections */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 60px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .mission-list, .why-choose-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mission-list li, .why-choose-list li {
+      background: url('/icons/Rectangle 86.png') no-repeat left 5px;
+      padding-left: 30px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    /* Expertise Section */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .expertise-card {
+      background: var(--bg-white);
+      padding: 25px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .expertise-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .expertise-card img {
+      height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .expertise-card h3 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    /* Why Choose Us */
+    .why-choose-list li {
+      font-size: 1rem;
+    }
+
+    /* Industries Section */
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .industry-card {
+      position: relative;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .industry-card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .industry-card img.bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .industry-card img.icon {
+      height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .industry-card h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    /* Demo Banner */
+    .demo-banner {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      border-radius: 12px;
+    }
+
+    .demo-banner h2 {
+      font-size: 2.2rem;
+      margin: 0 0 15px;
+    }
+
+    .demo-banner p {
+      margin: 0 0 30px;
+    }
+
+    .btn-demo {
+      background-color: white;
+      color: var(--primary);
+      padding: 15px 35px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .btn-demo:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--text-dark);
+      color: var(--bg-light);
+      padding: 60px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-col p, .footer-col a {
+      color: var(--text-light);
+      text-decoration: none;
+      line-height: 1.8;
+    }
+
+    .footer-col a:hover {
+      color: var(--bg-white);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #4b5563;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">{companyInfo.name}</a>
+      <div class="nav-menu">
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/site-references">Customers</a>
+        <a href="/about-us">About Us</a>
+        <a href="/#contact">Contact</a>
+        <div class="lang-switcher">
+          <span>ไทย</span> | <span>EN</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>About Us</h1>
+      <h2>DeRIVE Innovation</h2>
+      <p>เป็นผู้พัฒนาและให้บริการซอฟต์แวร์ด้านโลจิสติกส์ที่มุ่งเน้นการเพิ่มประสิทธิภาพการดำเนินงานขององค์กร ผ่านระบบบริหารจัดการ การขนส่ง การวางแผนเส้นทางอัจฉริยะ การบริหารคลังสินค้าและ การเชื่อมต่อข้อมูลแบบครบวงจร เราพัฒนาโซลูชันที่สามารถปรับแต่งได้ตามลักษณะธุรกิจของลูกค้า เพื่อช่วยลดต้นทุน เพิ่มประสิทธิภาพและรองรับการเติบโตใน ยุคดิจิทัล</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Our Story -->
+    <section class="section">
+      <div class="grid-2">
+        <div>
+          <h2 class="section-title" style="text-align: left;">Our Story</h2>
+          <p>DeRIVE Innovation ก่อตั้งขึ้นจากความตั้งใจที่จะนำเทคโนโลยีมาช่วยแก้ไขปัญหาที่เกิดขึ้นจริงในธุรกิจโลจิสติกส์ ตั้งแต่การวางแผนเส้นทางการบริหาร ยานพาหนะ ไปจนถึงการจัดการคลังสินค้า เรามุ่งมั่นพัฒนาระบบที่ตอบโจทย์การใช้งานจริงพร้อมสร้างนวัตกรรมที่ช่วยให้องค์กรดำเนินงานได้อย่างมี ประสิทธิภาพและแข่งขันได้ในอนาคต</p>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Our Story" style="width: 100%; border-radius: 8px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="section">
+      <div class="grid-2">
+        <div>
+          <h3 class="section-title" style="text-align: left;">Vision</h3>
+          <p>ก้าวสู่การเป็นพันธมิตรด้านเทคโนโลยีโลจิสติกส์ชั้นนำ ที่ช่วยให้องค์กรบริหารจัดการการขนส่งและซัพพลายเชน ได้อย่างชาญฉลาดมีประสิทธิภาพและพร้อมรองรับการ เติบโตในอนาคต</p>
+        </div>
+        <div>
+          <h3 class="section-title" style="text-align: left;">Mission</h3>
+          <ul class="mission-list">
+            <li>พัฒนาเทคโนโลยีที่ตอบโจทย์การดำเนินงานจริงของธุรกิจ</li>
+            <li>ช่วยลดต้นทุนและเพิ่มประสิทธิภาพด้านโลจิสติกส์</li>
+            <li>สร้างระบบที่ยืดหยุ่น ปรับแต่งได้ และรองรับการเติบโต</li>
+            <li>เป็นพันธมิตรที่สนับสนุนการเปลี่ยนผ่านสู่ Digital Transformation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Expertise -->
+    <section class="section">
+      <h2 class="section-title">Our Expertise</h2>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <img src="/icons/icon Transportation.png" alt="Icon">
+          <h3>Transportation Management</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Route Optimization.png" alt="Icon">
+          <h3>Route Optimization</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Fleet Management.png" alt="Icon">
+          <h3>Fleet Management</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Warehouse Management.png" alt="Icon">
+          <h3>Warehouse Management</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Mobile Applications.png" alt="Icon">
+          <h3>Mobile Applications</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Integration.png" alt="Icon">
+          <h3>ERP / SAP Integration</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon GPS.png" alt="Icon">
+          <h3>GPS Connectivity</h3>
+        </div>
+        <div class="expertise-card">
+          <img src="/icons/icon Dashboard.png" alt="Icon">
+          <h3>Dashboard & Analytics</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section">
+        <h2 class="section-title">Why Choose DeRIVE Innovation</h2>
+        <div class="grid-2">
+            <div>
+                <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1974&auto=format&fit=crop" alt="Why Choose Us" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div>
+                <ul class="why-choose-list">
+                    <li>เชี่ยวชาญด้านเทคโนโลยีโลจิสติกส์</li>
+                    <li>พัฒนาด้วย AI และข้อมูลอัจฉริยะ</li>
+                    <li>ปรับแต่งระบบให้เหมาะกับแต่ละธุรกิจ</li>
+                    <li>เชื่อมต่อกับระบบองค์กรได้อย่างสมบูรณ์</li>
+                    <li>รองรับการขยายตัวในอนาคต</li>
+                    <li>มีทีมงานพร้อมให้คำปรึกษาและดูแลระยะยาว</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section class="section">
+      <h2 class="section-title">Industries We Serve</h2>
+      <div class="industries-grid">
+        <div class="industry-card">
+          <img class="bg" src="/icons/Logistics Provider.png" alt="Logistics Provider">
+          <div class="industry-card-content">
+            <img class="icon" src="https://img.icons8.com/ios-filled/50/ffffff/logistics.png" alt="Icon">
+            <h3>Logistics Provider</h3>
+          </div>
+        </div>
+        <div class="industry-card">
+          <img class="bg" src="/icons/Transportation.png" alt="Transportation">
+          <div class="industry-card-content">
+            <img class="icon" src="https://img.icons8.com/ios-filled/50/ffffff/container-truck.png" alt="Icon">
+            <h3>Transportation</h3>
+          </div>
+        </div>
+        <div class="industry-card">
+          <img class="bg" src="/icons/Warehouse.png" alt="Warehouse">
+          <div class="industry-card-content">
+            <img class="icon" src="https://img.icons8.com/ios-filled/50/ffffff/open-box.png" alt="Icon">
+            <h3>Warehouse</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Banner -->
+    <section class="section">
+      <div class="demo-banner">
+        <h2>Ready to Optimize Your Transportation Operations?</h2>
+        <p>Access and download product materials, documentation, and demonstrations.</p>
+        <a href="#" class="btn-demo">Request Demo</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>DeRIVE Innovation Co., Ltd.</h4>
+          <p>Delivering innovative logistics software solutions that empower organizations to operate smarter, faster, and more efficiently.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Address</h4>
+          <p>บริษัท ดีไรฟ์ อินโนเวชั่น จำกัด<br>653/37 ถนนจรัญสนิทวงศ์<br>บางกอกน้อย กรุงเทพมหานคร 10700</p>
+          <p><strong>Phone:</strong> {companyInfo.phone}<br><strong>Email:</strong> {companyInfo.email}</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <p><a href="/">Home</a></p>
+          <p><a href="/products">Products</a></p>
+          <p><a href="/site-references">Customers</a></p>
+          <p><a href="/about-us">About</a></p>
+          <p><a href="/#contact">Contact</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © {new Date().getFullYear()} DeRIVE Innovation. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.onscroll = function () {
+      if (document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    };
+  </script>
+
+</body>
+</html>
