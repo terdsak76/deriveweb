@@ -1,0 +1,303 @@
+---
+const companyInfo = {
+  name: "DeRIVE Innovation",
+  address: "653/37 ถนนจรัญสนิทวงศ์ บางกอกน้อย กรุงเทพมหานคร 10700",
+  phone: "064-934-0533",
+  email: "derive.in8@derive.co.th",
+};
+---
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - {companyInfo.name}</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --bg-white: #ffffff;
+      --bg-light: #f9fafb;
+      --border-color: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .navbar.scrolled {
+      background-color: var(--bg-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/icons/Contact BG.png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 180px 20px 120px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Contact Info Section */
+    .section {
+      padding: 80px 0;
+    }
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .contact-info-card {
+      background: var(--bg-white);
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    .contact-info-card img {
+      height: 40px;
+      margin-bottom: 20px;
+    }
+
+    /* Inquiry Section */
+    .inquiry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .inquiry-card {
+      background: var(--bg-white);
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .inquiry-card img {
+      height: 50px;
+      margin-bottom: 20px;
+    }
+
+    /* Contact Form Section */
+    .contact-form-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 35px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/icons/logo derive.png" alt="DeRIVE Innovation">
+      </a>
+      <div class="nav-menu">
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/site-references">Customers</a>
+        <a href="/about-us">About Us</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We're here to help. Contact us for inquiries, support, or partnership opportunities.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Contact Info Section -->
+    <section class="section">
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <img src="/icons/Pin.png" alt="Address">
+          <h4>Address</h4>
+          <p>{companyInfo.address}</p>
+        </div>
+        <div class="contact-info-card">
+          <img src="/icons/Phone.png" alt="Phone">
+          <h4>Phone</h4>
+          <p>{companyInfo.phone}</p>
+        </div>
+        <div class="contact-info-card">
+          <img src="/icons/mail.png" alt="Email">
+          <h4>Email</h4>
+          <p>{companyInfo.email}</p>
+        </div>
+        <div class="contact-info-card">
+          <img src="/icons/Time.png" alt="Hours">
+          <h4>Working Hours</h4>
+          <p>Mon - Fri: 9:00 - 18:00</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquiry Section -->
+    <section class="section" style="background-color: var(--bg-light);">
+      <h2 style="text-align: center; margin-bottom: 60px;">How can we help you?</h2>
+      <div class="inquiry-grid">
+        <div class="inquiry-card">
+          <img src="/icons/Icon Consultation.png" alt="Consultation">
+          <h3>Consultation</h3>
+          <p>Get expert advice on optimizing your logistics operations.</p>
+        </div>
+        <div class="inquiry-card">
+          <img src="/icons/Icon Custom Development.png" alt="Custom Development">
+          <h3>Custom Development</h3>
+          <p>Tailor our solutions to fit your unique business needs.</p>
+        </div>
+        <div class="inquiry-card">
+          <img src="/icons/Icon Technical Support.png" alt="Technical Support">
+          <h3>Technical Support</h3>
+          <p>Receive assistance from our dedicated support team.</p>
+        </div>
+        <div class="inquiry-card">
+          <img src="/icons/Icon Partnership.png" alt="Partnership">
+          <h3>Partnership</h3>
+          <p>Explore opportunities to collaborate and grow together.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section">
+      <div class="contact-form-section">
+        <div>
+          <h2>Send us a Message</h2>
+          <p>Fill out the form and our team will get back to you within 24 hours.</p>
+        </div>
+        <div>
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.onscroll = function () {
+      if (document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    };
+  </script>
+
+</body>
+</html>
