@@ -1,278 +1,442 @@
 ---
-// Component Script
 const companyInfo = {
   name: "DeRIVE Innovation",
-  tagline: "Engineering & Digital Solutions for a Better Tomorrow",
-  address: "653/37 ถนนจรัญสนิทวงศ์ บางกอกน้อย กรุงเทพฯ 10700",
-  phone: "+66 (81) 492-6996",
+  phone: "064-934-0533",
   email: "derive.in8@derive.co.th",
-  contactPerson: "คุณกัญญารัตน์",
-  facebook: "https://www.facebook.com/deriveinnovation/"
 };
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{companyInfo.name}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - {companyInfo.name}</title>
 
-  <!-- Google Font (clean + professional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg: #f9fafb;
       --primary: #2563eb;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --bg-white: #ffffff;
+      --bg-light: #f9fafb;
+      --border-color: #e5e7eb;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-white);
+      color: var(--text-dark);
     }
 
     .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    header {
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .navbar.scrolled {
+      background-color: var(--bg-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 60px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 20px;
     }
 
-    .logo {
-      font-weight: 600;
-      font-size: 1.2rem;
+    .logo img {
+      height: 40px;
     }
 
-    .nav-links {
+    .nav-menu {
       display: flex;
-      gap: 30px;
       align-items: center;
+      gap: 40px;
     }
 
-    .nav-links a {
+    .nav-menu a {
       text-decoration: none;
-      color: var(--text);
-      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 500;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
+    .nav-menu a:hover {
       color: var(--primary);
     }
 
-    .nav-links a.active {
-      color: var(--primary);
-      font-weight: 600;
+    .lang-switcher {
+      display: flex;
+      gap: 10px;
     }
 
-    .contact-link {
-      font-size: 0.9rem;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
+    /* Hero Section */
     .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 80px;
+      background: url('/icons/Hero BG.png') center/cover no-repeat;
+      color: white;
+      padding: 150px 20px;
+    }
+
+    .hero-content {
+      max-width: 500px;
     }
 
     .hero h1 {
       font-size: 3rem;
-      line-height: 1.2;
-      margin-bottom: 20px;
+      font-weight: 700;
+      margin: 0 0 20px;
     }
 
     .hero p {
-      color: var(--muted);
       font-size: 1.1rem;
-      max-width: 400px;
+      line-height: 1.7;
+      margin-bottom: 30px;
     }
 
-    .hero img {
-      width: 100%;
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 35px;
+      text-decoration: none;
+      font-weight: 600;
       border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Clients Section */
+    .clients {
+      padding: 40px 0;
+      background-color: var(--bg-light);
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .clients-grid img {
+      max-width: 100%;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+
+    .clients-grid img:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    /* About Section */
+    .section {
+      padding: 80px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
     }
 
     .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Products Section */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--bg-white);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 30px;
+    }
+
+    .product-card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 20px;
+    }
+
+    .product-card h3 {
+      font-size: 1.5rem;
+      margin: 0 0 15px;
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .why-choose-card {
       text-align: center;
-      margin-bottom: 40px;
     }
 
-    .section-title h2 {
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      color: var(--muted);
+    .why-choose-card img {
+      height: 60px;
+      margin-bottom: 20px;
     }
 
-    .contact-list {
-      max-width: 600px;
-      margin: auto;
-      border-top: 1px solid var(--border);
+    .why-choose-card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 10px;
     }
 
-    .contact-item {
-      display: flex;
-      gap: 20px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
+    /* Demo Banner */
+    .demo-banner {
+      background: url('/icons/Demo BG.png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 12px;
     }
 
-    .icon {
-      font-size: 20px;
-      width: 24px;
+    .demo-banner h2 {
+      font-size: 2.5rem;
+      margin: 0 0 15px;
     }
 
-    .label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 5px;
+    .demo-banner p {
+      margin: 0 0 30px;
+      font-size: 1.1rem;
     }
 
-    .value {
-      font-size: 1rem;
-      font-weight: 500;
+    /* Footer */
+    .footer {
+      background-color: var(--text-dark);
+      color: var(--bg-light);
+      padding: 60px 0 20px;
     }
 
-    a {
-      color: var(--primary);
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-col p, .footer-col a {
+      color: var(--text-light);
       text-decoration: none;
+      line-height: 1.8;
     }
 
-    footer {
+    .footer-col a:hover {
+      color: var(--bg-white);
+    }
+
+    .footer-bottom {
       text-align: center;
-      margin-top: 60px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        width: 100%;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
+      border-top: 1px solid #4b5563;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-light);
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
 
-    <!-- Header -->
-    <header>
-      <div class="logo">{companyInfo.name}</div>
-      <nav class="nav-links">
-        <a href="/" class="active">Home</a>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <img src="/icons/logo derive.png" alt="DeRIVE Innovation">
+      </a>
+      <div class="nav-menu">
+        <a href="/">Home</a>
         <a href="/products">Products</a>
         <a href="/site-references">Customers</a>
         <a href="/about-us">About Us</a>
-        <a href="#contact" class="contact-link">Contact</a>
-      </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <h1>
-          DeRIVE <br />
-          Innovation
-        </h1>
-        <p>{companyInfo.tagline}</p>
+        <a href="/#contact">Contact</a>
+        <div class="lang-switcher">
+          <span>ไทย</span> | <span>EN</span>
+        </div>
       </div>
+    </div>
+  </nav>
 
-      <!-- Replace with your real image -->
-      <img src="/hero.jpg" alt="Company Image" />
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="section-title">
-        <h2>CONTACT INFORMATION</h2>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Optimize Your Logistics with AI</h1>
+        <p>DeRIVE is a total logistics solution provider, covering transportation and warehouse management with AI to enhance efficiency and reduce costs.</p>
+        <a href="#" class="btn">Request Demo</a>
       </div>
+    </div>
+  </section>
 
-      <div class="contact-list">
-
-        <div class="contact-item">
-          <div class="icon">📍</div>
-          <div>
-            <div class="label">Address</div>
-            <div class="value">{companyInfo.address}</div>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="icon">📞</div>
-          <div>
-            <div class="label">Phone</div>
-            <div class="value">
-              <a href={`tel:${companyInfo.phone}`}>{companyInfo.phone}</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="icon">✉️</div>
-          <div>
-            <div class="label">Contact</div>
-            <div class="value">
-              {companyInfo.contactPerson} ·
-              <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="icon">👍</div>
-          <div>
-            <div class="label">Follow</div>
-            <div class="value">
-              <a href={companyInfo.facebook} target="_blank">
-                Visit Facebook Page
-              </a>
-            </div>
-          </div>
-        </div>
-
+  <!-- Clients Section -->
+  <section class="clients">
+    <div class="container">
+      <div class="clients-grid">
+        <img src="/icons/1.png" alt="Client 1">
+        <img src="/icons/2.png" alt="Client 2">
+        <img src="/icons/3.png" alt="Client 3">
+        <img src="/icons/4.png" alt="Client 4">
+        <img src="/icons/5.png" alt="Client 5">
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-      © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
-    </footer>
+  <!-- About Section -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <img src="/icons/About VaRP TMS.png" alt="About VaRP TMS" style="width: 100%; border-radius: 8px;">
+        </div>
+        <div>
+          <h2 class="section-title" style="text-align: left;">About VaRP TMS</h2>
+          <p>VaRP TMS is a Transportation Management System that helps you plan, execute, and optimize the physical movement of goods, both incoming and outgoing, and makes sure the shipment is compliant, proper documentation is available. This kind of system is often part of a larger Supply Chain Management (SCM) system.</p>
+          <a href="/about-us" class="btn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- Products Section -->
+  <section class="section" style="background-color: var(--bg-light);">
+    <div class="container">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 60px;">Our Products</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="/icons/Product - VaRP TMS.png" alt="Product Icon">
+          <h3>VaRP TMS & Route Optimization</h3>
+          <p>Advanced transportation management with intelligent route planning.</p>
+        </div>
+        <div class="product-card">
+          <img src="/icons/Product - Mobile POD.png" alt="Product Icon">
+          <h3>Mobile POD</h3>
+          <p>Real-time proof of delivery and field documentation.</p>
+        </div>
+        <div class="product-card">
+          <img src="/icons/Product - Fleet Monitoring.png" alt="Product Icon">
+          <h3>Fleet Monitoring / Order Tracking</h3>
+          <p>Complete visibility of your logistics and fleet operations.</p>
+        </div>
+        <div class="product-card">
+          <img src="/icons/Product - WMS.png" alt="Product Icon">
+          <h3>WMS</h3>
+          <p>Efficient warehouse and inventory control management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 60px;">Why Choose VaRP TMS</h2>
+      <div class="why-choose-grid">
+        <div class="why-choose-card">
+          <img src="/icons/Icon Smart AI Planning.png" alt="Icon">
+          <h3>AI-Powered Planning</h3>
+          <p>Optimize routes and reduce costs with our intelligent algorithms.</p>
+        </div>
+        <div class="why-choose-card">
+          <img src="/icons/Icon Real-time Visibility.png" alt="Icon">
+          <h3>Real-time Visibility</h3>
+          <p>Track your fleet and orders instantly for better control.</p>
+        </div>
+        <div class="why-choose-card">
+          <img src="/icons/Icon Seamless Integration.png" alt="Icon">
+          <h3>Seamless Integration</h3>
+          <p>Connect with your existing ERP, SAP, and GPS systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="demo-banner">
+        <h2>Ready to Optimize Your Transportation Operations?</h2>
+        <p>Access and download product materials, documentation, and demonstrations.</p>
+        <a href="#" class="btn">Request Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="/icons/logo derive.png" alt="DeRIVE Innovation" style="height: 40px; margin-bottom: 20px;">
+          <p>Delivering innovative logistics software solutions that empower organizations to operate smarter, faster, and more efficiently.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <p><a href="/">Home</a></p>
+          <p><a href="/products">Products</a></p>
+          <p><a href="/site-references">Customers</a></p>
+          <p><a href="/about-us">About</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>653/37 Charan Sanitwong Rd, Bangkok Noi, Bangkok 10700</p>
+          <p><strong>Phone:</strong> {companyInfo.phone}</p>
+          <p><strong>Email:</strong> {companyInfo.email}</p>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <p><a href="#">Facebook</a></p>
+          <p><a href="#">LinkedIn</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © {new Date().getFullYear()} DeRIVE Innovation. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.onscroll = function () {
+      if (document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    };
+  </script>
+
 </body>
 </html>
